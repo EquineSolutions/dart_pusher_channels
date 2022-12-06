@@ -51,7 +51,7 @@ class WebSocketChannelConnectionDelegate extends ConnectionDelegate {
   Duration _activityDuration = const Duration(seconds: 60);
 
   void _preEventHandler(data) {
-    print("BEFORE")
+    print("BEFORE");
     var root = jsonize(data);
     print("AFTER");
     var d = jsonize(root['data']);
