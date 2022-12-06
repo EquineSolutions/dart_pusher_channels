@@ -223,7 +223,7 @@ abstract class ConnectionDelegate {
     PusherChannelsPackageLogger.log(data);
     Map raw = jsonize(data);
     var name = raw['event']?.toString() ?? "";
-    var payload = jsonize(raw['data']);
+    var payload = jsonDecode(raw['data']);
     var channelName = raw['channel']?.toString();
     var event = internalEventFactory(name, payload) ??
         externalEventFactory(name, channelName, payload);

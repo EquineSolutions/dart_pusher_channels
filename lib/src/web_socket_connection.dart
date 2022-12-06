@@ -51,18 +51,11 @@ class WebSocketChannelConnectionDelegate extends ConnectionDelegate {
   Duration _activityDuration = const Duration(seconds: 60);
 
   void _preEventHandler(data) {
-    try {
-      print('HANDLING');
-      var root = json.decode(data);
-      var d = json.decode(root['data']);
-      print(d);
-      var timeout = d['activity_timeout'];
-      if (timeout is int) {
-        _activityDuration = Duration(seconds: timeout);
-      }
-    }
-    catch(e) {
-      print(e);
+    var root = jsonize(data);
+    var d = jsonDecode(root['data']);
+    var timeout = d['activity_timeout'];
+    if (timeout is int) {
+      _activityDuration = Duration(seconds: timeout);
     }
   }
 
