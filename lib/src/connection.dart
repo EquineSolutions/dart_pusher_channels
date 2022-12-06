@@ -218,29 +218,20 @@ abstract class ConnectionDelegate {
   @mustCallSuper
   @protected
   void onEventRecieved(data) async {
-    try {
-      print("ONRECEIVED");
-      if (_isDisconnected) return;
-      await onPong();
-      PusherChannelsPackageLogger.log(data);
-      print("DATA LOOGED");
-      Map raw = jsonize(data);
-      var name = raw['event']?.toString() ?? "";
-      var payload = jsonDecode(raw['data'] ?? "");
-      var channelName = raw['channel']?.toString();
-      var event = internalEventFactory(name, payload) ??
-          externalEventFactory(name, channelName, payload);
+    if (_isDisconnected) return;
+    await onPong();
+    PusherChannelsPackageLogger.log(data);
+    Map raw = jsonize(data);
+    var name = raw['event']?.toString() ?? "";
+    var payload = jsonize(raw['data']);
+    var channelName = raw['channel']?.toString();
+    var event = internalEventFactory(name, payload) ??
+        externalEventFactory(name, channelName, payload);
 
-      event?.callHandler();
+    event?.callHandler();
 
-      if (event != null && !onEventRecievedController.isClosed) {
-        onEventRecievedController.add(event);
-      }
-    }
-    catch(error, stk){
-      print("ON RECEIVE ERROR");
-      print(error);
-      print(stk);
+    if (event != null && !onEventRecievedController.isClosed) {
+      onEventRecievedController.add(event);
     }
   }
 
