@@ -1,4 +1,4 @@
-part of channels;
+  part of channels;
 
 /// Implementation of [ReadEvent] recieved from [Channel]
 class ChannelReadEvent extends Event implements ReadEvent {
