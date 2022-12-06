@@ -235,6 +235,7 @@ abstract class ConnectionDelegate {
     var event = internalEventFactory(name, payload) ??
         externalEventFactory(name, channelName, payload);
 
+    print(event);
     event?.callHandler();
 
     if (event != null && !onEventRecievedController.isClosed) {
