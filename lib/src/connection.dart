@@ -226,7 +226,7 @@ abstract class ConnectionDelegate {
       print("DATA LOOGED");
       Map raw = jsonize(data);
       var name = raw['event']?.toString() ?? "";
-      var payload = raw['data'];
+      var payload = jsonDecode(raw['data']);
       var channelName = raw['channel']?.toString();
       var event = internalEventFactory(name, payload) ??
           externalEventFactory(name, channelName, payload);
