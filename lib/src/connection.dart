@@ -218,12 +218,14 @@ abstract class ConnectionDelegate {
   @mustCallSuper
   @protected
   void onEventRecieved(data) async {
+    print("ONRECEIVED");
     if (_isDisconnected) return;
     await onPong();
     PusherChannelsPackageLogger.log(data);
+    print("DATA LOOGED");
     Map raw = jsonize(data);
     var name = raw['event']?.toString() ?? "";
-    var payload = jsonDecode(raw['data']);
+    var payload = raw['data'];
     var channelName = raw['channel']?.toString();
     var event = internalEventFactory(name, payload) ??
         externalEventFactory(name, channelName, payload);
