@@ -199,7 +199,14 @@ abstract class ConnectionDelegate {
   Map jsonize(raw) {
     Map data;
     if (raw is String) {
-      data = jsonDecode(raw);
+      final temp = jsonDecode(raw);
+      if(temp is List) {
+        data = {"data": temp};
+      }
+      else {
+        data = temp;
+      }
+
     } else {
       data = {};
     }
