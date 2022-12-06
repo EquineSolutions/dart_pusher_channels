@@ -53,11 +53,11 @@ class WebSocketChannelConnectionDelegate extends ConnectionDelegate {
   void _preEventHandler(data) {
     var root = jsonize(data);
     var d = jsonDecode(root['data']);
-    print(d.activity_timeout);
-    return;
-    var timeout = d.activity_timeout;
-    if (timeout is int) {
-      _activityDuration = Duration(seconds: timeout);
+    if(d is Map) {
+      var timeout = d["activity_timeout"];
+      if (timeout is int) {
+        _activityDuration = Duration(seconds: timeout);
+      }
     }
   }
 
