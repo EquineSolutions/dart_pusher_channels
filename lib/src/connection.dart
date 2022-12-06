@@ -237,9 +237,10 @@ abstract class ConnectionDelegate {
         onEventRecievedController.add(event);
       }
     }
-    catch(error){
+    catch(error, stk){
       print("ON RECEIVE ERROR");
       print(error);
+      print(stk);
     }
   }
 
