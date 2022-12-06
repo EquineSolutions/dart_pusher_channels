@@ -56,6 +56,7 @@ class WebSocketChannelConnectionDelegate extends ConnectionDelegate {
     if(d is Map) {
       var timeout = d["activity_timeout"];
       if (timeout is int) {
+        print("TIMEOUT");
         _activityDuration = Duration(seconds: timeout);
       }
     }
