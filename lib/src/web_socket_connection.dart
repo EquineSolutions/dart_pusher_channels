@@ -53,6 +53,8 @@ class WebSocketChannelConnectionDelegate extends ConnectionDelegate {
   void _preEventHandler(data) {
     var root = jsonize(data);
     var d = jsonDecode(root['data']);
+    print(d);
+    return;
     var timeout = d.activity_timeout;
     if (timeout is int) {
       _activityDuration = Duration(seconds: timeout);
@@ -71,7 +73,7 @@ class WebSocketChannelConnectionDelegate extends ConnectionDelegate {
   @override
   void onEventRecieved(data) {
     _reconnectTries = 0;
-    //_preEventHandler(data);
+    _preEventHandler(data);
     if (!_connectionCompleter.isCompleted) {
       _connectionCompleter.complete();
     }
