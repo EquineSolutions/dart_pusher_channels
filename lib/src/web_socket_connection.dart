@@ -70,6 +70,7 @@ class WebSocketChannelConnectionDelegate extends ConnectionDelegate {
 
   @override
   void onEventRecieved(data) {
+    print(data);
     _reconnectTries = 0;
     _preEventHandler(data);
     if (!_connectionCompleter.isCompleted) {
